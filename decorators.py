@@ -19,7 +19,7 @@ def stopwatch(f):
     def func(*args, **kwargs):
         tic = time.time()
         result = f(*args, **kwargs)
-        printf(f"This function took: {time.time() - tic}")
+        print(f"This function took: {time.time() - tic}")
         return result
 
     return func

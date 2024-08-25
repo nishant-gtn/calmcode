@@ -1,0 +1,30 @@
+black filename.py
+
+flake8 filename.py
+
+
+pre-commit sample-config | out-file .pre-commit-config.yaml -encoding utf8
+pre-commit install
+
+pre-commit autoupdate
+
+
+
+pyinstrument folder/script.py
+pyinstrument -r html path/script.py
+pyinstrument -r speedscope -o speedscope.json path/script.py
+    - visualize this using https://www.speedscope.app/
+
+
+
+pytest      # use test files with name test*.py and function with name test*():
+pytest file.py::function
+pytest --verbose
+
+after creating packages and folders:
+python setup.py develop
+
+# coverage
+python -m pip install pytest-cov
+pytest --cov packagename
+pytest --cov packagename --cov-report html
