@@ -28,3 +28,25 @@ python setup.py develop
 python -m pip install pytest-cov
 pytest --cov packagename
 pytest --cov packagename --cov-report html
+
+# run only tests marked with certain marker
+pytest file.py -m `mark`
+
+# parallel xdist
+pytest -n 2     # use 2 cores
+pytest -n auto
+
+# stop pytest when error is found
+pytest -x
+# after installing clarity
+pytest -x -vv
+
+
+
+Bandit (security)
+bandit file.py
+
+# check all files of given folder
+bandit -r folder/
+
+# skip checking by adding # nosec to the concerned line
