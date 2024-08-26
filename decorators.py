@@ -13,6 +13,7 @@
 
 import time
 import random
+from logger import logger
 
 
 def stopwatch(f):
@@ -26,8 +27,14 @@ def stopwatch(f):
 
 
 def sleep_random(s=1):
-    time.sleep(s + random.random())
-    return "Done!"
+    try:
+        0 / 0
+        logger.warning(f"This is a test line for logger with sleep value {s}")
+        sleepAmount = s + random.random()  # nosec
+        time.sleep(sleepAmount)
+        return "Done!"
+    except BaseException:
+        logger.error("An error occurred", exc_info=True)
 
 
 timed_sleep = stopwatch(sleep_random)

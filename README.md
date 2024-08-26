@@ -404,3 +404,122 @@ In this example:
 - The math expressions demonstrate inline and block-level mathematical notation.
 
 ```
+
+# Logging in Python
+
+Logging is crucial for monitoring and debugging our applications. Here’s how we can set up and use logging effectively in Python.
+
+## Basic Logging Setup
+
+We start with a basic logging configuration that sends logs to the console.
+
+```python
+import logging
+
+logger = logging.getLogger(__name__)
+handler = logging.StreamHandler()
+fmt = '%(levelname)s %(asctime)s %(filename)s %(funcName)s %(lineno)d %(message)s'
+formatter = logging.Formatter(fmt)
+handler.setFormatter(formatter)
+
+logger.addHandler(handler)
+logger.setLevel(logging.WARNING)
+```
+
+### Configuration Details
+
+- **Handler**: `StreamHandler()` directs logs to the console.
+- **Formatter**: Defines the log message format with level, timestamp, filename, function name, line number, and message.
+- **Log Level**: Set to `WARNING`, so only `WARNING`, `ERROR`, and `CRITICAL` messages are logged.
+
+This setup ensures we see significant issues and errors in the console output.
+
+## Log Levels
+
+To capture different levels of log messages, we adjust the logging level and include various log statements.
+
+```python
+logger.debug('This is a debug statement')
+logger.info('This is an info statement')
+logger.warning('This is a warning statement')
+logger.error('This is an error statement')
+logger.critical('This is a critical statement')
+```
+
+### Changes
+
+- **Log Level**: Adjusting levels like `DEBUG`, `INFO`, `WARNING`, `ERROR`, and `CRITICAL` allows us to control which messages are logged.
+- **Log Messages**: Different log statements demonstrate how each level is captured based on the set log level.
+
+With `WARNING` set as the level, only `WARNING`, `ERROR`, and `CRITICAL` messages appear.
+
+## Logging to a File
+
+We can extend our logging configuration to also write messages to a file for persistent storage.
+
+```python
+file_handler = logging.FileHandler("debug.log")
+file_handler.setLevel(logging.DEBUG)
+fmt_file = '%(levelname)s %(asctime)s [%(filename)s:%(funcName)s:%(lineno)d] %(message)s'
+file_formatter = logging.Formatter(fmt_file)
+file_handler.setFormatter(file_formatter)
+
+logger.addHandler(file_handler)
+```
+
+### Changes
+
+- **Handler**: Added `FileHandler()` to log messages to a file (`debug.log`).
+- **Log Levels**: Different levels for console and file logging, allowing detailed file logs and cleaner console output.
+- **Formatter**: Custom format for file logs.
+
+This setup enables detailed file logging while keeping console output more concise.
+
+## Handling Errors
+
+To capture errors with traceback, we enhance our logging setup.
+
+```python
+import sys
+
+from logger import logger  # Assuming logger is configured as above
+
+if __name__ == "__main__":
+    logger.debug("Program started.")
+    try:
+        ticker = sys.argv[1]
+        logger.info(f"Will find summary for {ticker}.")
+        print(f"The average stock price is {summary(ticker)}")
+        logger.debug("Program ended with success.")
+    except BaseException:
+        logger.error("Error happened!", exc_info=True)
+```
+
+### Changes
+
+- **Exception Logging**: Added `exc_info=True` to log traceback details when an error occurs.
+
+This helps us diagnose issues by showing where and why an error happened.
+
+## Using Rich for Enhanced Logging
+
+`Rich` provides colorful and formatted logging output to enhance readability.
+
+```python
+from rich.logging import RichHandler
+
+shell_handler = RichHandler()
+shell_handler.setLevel(logging.DEBUG)
+fmt_shell = '%(message)s'
+shell_formatter = logging.Formatter(fmt_shell)
+shell_handler.setFormatter(shell_formatter)
+
+logger.addHandler(shell_handler)
+```
+
+### Changes
+
+- **Handler**: Replaced `StreamHandler()` with `RichHandler()` for enhanced console output.
+- **Formatter**: Simplified format for rich console logs while retaining detailed file logs.
+
+`Rich` makes console logs more readable and visually appealing, while file logs retain detailed information for reference.
