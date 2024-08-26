@@ -50,3 +50,55 @@ bandit file.py
 bandit -r folder/
 
 # skip checking by adding # nosec to the concerned line
+
+
+
+
+
+Mkdocs
+pip install mkdocs
+
+mkdocs new .
+
+mkdocs serve
+
+# To change css
+# in mkdocs.yml
+extra_css: [filename.css]
+
+# change theme
+theme:
+    name: readthedocs
+
+# mkdocs material
+pip install mkdocs-material
+
+# change theme using material
+theme:
+    name: 'material_name`
+    palette:
+        primary: `color`    # eg purple
+        accent: `color`     # eg cyan
+    font:
+        text: `font`        # eg Ubuntu
+    logo:
+        icon: `icon`        # eg cloud
+
+# add extensions
+markdown_extensions:
+    - footnotes
+    - codehilite:
+        linenums: true
+
+# extras, for emojis, custom checkbox, expressions, etc.
+pip install pymdown-extensions
+
+markdown_extensions:
+  - pymdownx.arithmatex
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - footnotes
+  - codehilite:
+      linenums: true

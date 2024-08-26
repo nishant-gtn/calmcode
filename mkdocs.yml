@@ -1,0 +1,20 @@
+site_name: My Docs
+theme:
+  name: material
+  palette:
+    primary: blue
+    accent: cyan
+  font:
+    text: "Ubuntu"
+  logo:
+    icon: "cloud"
+extra_javascript:
+  - "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"
+markdown_extensions:
+  - pymdownx.arithmatex
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji
+  - footnotes
+  - codehilite:
+      linenums: true
