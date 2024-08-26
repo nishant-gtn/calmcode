@@ -2,6 +2,13 @@
 # W291 - we dont care about trailing whitespace
 # E302 - one line between functions is fine
 ignore = W291,E302
-exclude = ignore_this.py
 max-complexity = 10
 max-line-length = 90
+exclude =
+    venv
+    migrations
+    __pycache__
+    manage.py
+    settings.py
+    env
+    .env
