@@ -3,12 +3,12 @@ import pytest
 import numpy as np
 
 
-def normalize(X):
-    return (X - X.min()) / (X.max() - X.min())
+def normalize(x):
+    return (x - x.min()) / (x.max() - x.min())
 
 
-def threshold(X, min_val=-1, max_val=1):
-    result = np.where(X <= min_val, min_val, X)
+def threshold(x, min_val=-1, max_val=1):
+    result = np.where(x <= min_val, min_val, x)
     return np.where(result >= max_val, max_val, result)
 
 
@@ -24,19 +24,19 @@ def random_numpy_array(request):
 @pytest.mark.parametrize("func", [normalize, threshold], ids=lambda d: d.__name__)
 def test_shape_same(func, random_numpy_array):
     time.sleep(1)
-    X_norm = func(random_numpy_array)
-    assert random_numpy_array.shape == X_norm.shape
+    x_norm = func(random_numpy_array)
+    assert random_numpy_array.shape == x_norm.shape
 
 
 def test_min_max_normalise(random_numpy_array):
-    X_norm = normalize(random_numpy_array)
-    assert X_norm.min() == 0.0
-    assert X_norm.max() == 1.0
+    x_norm = normalize(random_numpy_array)
+    assert x_norm.min() == 0.0
+    assert x_norm.max() == 1.0
 
 
 @pytest.mark.parametrize("min_val", [-3, -2, -1], ids=lambda x: f"min_val:{x}")
 @pytest.mark.parametrize("max_val", [3, 2, 1], ids=lambda x: f"max_val:{x}")
 def test_min_max_threshold(random_numpy_array, min_val, max_val):
-    X_norm = threshold(random_numpy_array, min_val, max_val)
-    assert X_norm.min() >= min_val
-    assert X_norm.max() <= max_val
+    x_norm = threshold(random_numpy_array, min_val, max_val)
+    assert x_norm.min() >= min_val
+    assert x_norm.max() <= max_val
